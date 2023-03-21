@@ -37,6 +37,12 @@ dependencies {
     //Swagger
     implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
 
+    //H2 Database
+    runtimeOnly("com.h2database:h2")
+
+    //Feign Client
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.5")
+
 
 }
 
