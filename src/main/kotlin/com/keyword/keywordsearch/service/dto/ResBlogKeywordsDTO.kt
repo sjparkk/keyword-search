@@ -30,7 +30,7 @@ data class ResBlogKeywordsDTO(
         - 카카오 블로그 검색 시 해당 정보 존재
         - 네이버 블로그 검색 시 해당 정보 존재하지 않음
     """)
-    val isEnd: Boolean? = null,
+    val end: Boolean? = null,
 
     @field:Schema(title = "검색 결과를 제공한 채널 정보", description = """
         - 카카오 블로그 검색 API 시 'KAKAO'

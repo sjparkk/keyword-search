@@ -46,7 +46,7 @@ class KakaoBlogSearchRequester(
                     datetime = it.datetime
                 )
             },
-            isEnd = kakaoResponse.meta.isEnd,
+            end = kakaoResponse.meta.isEnd,
             totalCount = kakaoResponse.meta.totalCount,
             pageableCount = kakaoResponse.meta.pageableCount,
             channelName = EntityEnum.SearchChannelType.KAKAO.value
