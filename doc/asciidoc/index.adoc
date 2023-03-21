@@ -1,0 +1,81 @@
+= API Document
+:toc: left
+:toclevels: 2
+:source-highlighter: highlightjs
+:host-url: http://localhost
+:swagger-url: {host-url}/swagger-ui/index.html#
+
+[[introduction]]
+== 1. 시작하기
+Blog Keyword Service
+
+link:{swagger-url}[Swagger Link, window="_blank"]
+
+[[common]]
+== 공통 사항
+
+=== Domain
+
+|===
+| 환경 | Domain
+
+| Local
+| `{host-url}`
+|===
+
+=== Common Response
+공통 응답
+|===
+| 코드 | 코드명
+
+| data / page
+| data는 단일 데이터, page는 페이징된 데이터
+
+| success
+| 응답 성공여부 : true / false
+
+| code
+| 응답 코드 번호
+
+| message
+| 응답 메시지
+|===
+
+응답코드
+|===
+| 코드 | 코드명
+
+| SERVER_ERROR
+| 서버 에러입니다.
+
+| UNAUTHORIZED
+| 인증에 실패하였습니다.
+
+| BAD_PARAMETER
+| 요청 파라미터가 잘못되었습니다.
+
+| NOT_FOUND
+| 리소스를 찾지 못했습니다.
+
+| OK
+| 요청이 성공하였습니다.
+|===
+
+&#160;
+
+== 2. Blog Keyword
+=== 2-1. 키워드를 통한 블로그 검색 API
+
+===== Path
+include::{snippets}/blog-condition-list-get/path-parameters.adoc[]
+
+===== Request Example
+include::{snippets}/blog-condition-list-get/http-request.adoc[]
+
+===== Response
+include::{snippets}/blog-condition-list-get/response-fields.adoc[]
+
+===== Response Example
+include::{snippets}/blog-condition-list-get/response-body.adoc[]
+
+&#160;
