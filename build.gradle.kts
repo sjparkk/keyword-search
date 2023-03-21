@@ -3,8 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.7.9"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
 
     kotlin("jvm") version "1.6.21"
+    kotlin("kapt") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
 }
@@ -43,6 +45,9 @@ dependencies {
     //Feign Client
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.5")
 
+    //Rest Docs
+    testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 
 }
 
@@ -55,4 +60,53 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+
+tasks {
+    val snippetsDir = file("$buildDir/generated-snippets")
+
+    clean {
+        delete("src/main/resources/static/docs")
+    }
+
+    test {
+        useJUnitPlatform()
+        systemProperty("org.springframework.restdocs.outputDir", snippetsDir)
+        outputs.dir(snippetsDir)
+    }
+
+    build {
+        dependsOn("copyDocument")
+    }
+
+    asciidoctor {
+        dependsOn(test)
+
+        attributes(
+            mapOf("snippets" to snippetsDir)
+        )
+        inputs.dir(snippetsDir)
+
+        doFirst {
+            delete("src/main/resources/static/docs")
+        }
+    }
+
+    register<Copy>("copyDocument") {
+        dependsOn(asciidoctor)
+
+        destinationDir = file(".")
+        from(asciidoctor.get().outputDir) {
+            into("src/main/resources/static/docs")
+        }
+    }
+
+    bootJar {
+        dependsOn(asciidoctor)
+
+        from(asciidoctor.get().outputDir) {
+            into("BOOT-INF/classes/static/docs")
+        }
+    }
 }
