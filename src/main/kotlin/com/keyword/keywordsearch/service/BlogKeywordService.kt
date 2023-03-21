@@ -35,7 +35,8 @@ class BlogKeywordService(
             try {
                 return blogSearchRequester.searchBlogs(keyword, pageable)
             } catch (e: Exception) {
-                log.error(":: 블로그 검색 서버 장애 발생")
+                val searchChannelName = blogSearchRequester.getRequesterName()
+                log.error(":: $searchChannelName 블로그 검색 서버 장애 발생")
             } finally {
                 //블로그 검색 조회 결과와 상관 없이 사용자 검색 요청 키워드 저장
                 eventPublisher.publishEvent(SaveBlogSearchKeywordEvent(keyword))

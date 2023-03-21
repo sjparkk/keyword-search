@@ -88,4 +88,8 @@ class NaverBlogSearchRequester(
         return naverResponse
     }
 
+    override fun getRequesterName(): String {
+        return EntityEnum.SearchChannelType.NAVER.value
+    }
+
 }

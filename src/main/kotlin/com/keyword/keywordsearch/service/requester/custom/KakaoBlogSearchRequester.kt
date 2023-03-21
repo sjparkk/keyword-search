@@ -78,4 +78,8 @@ class KakaoBlogSearchRequester(
         }
         return kakaoResponse
     }
+
+    override fun getRequesterName(): String {
+        return EntityEnum.SearchChannelType.KAKAO.value
+    }
 }

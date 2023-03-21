@@ -7,4 +7,6 @@ import org.springframework.stereotype.Component
 @Component
 interface BlogSearchRequester {
     fun searchBlogs(keyword: String, pageable: Pageable): ResBlogKeywordsDTO
+
+    fun getRequesterName(): String
 }
