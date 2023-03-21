@@ -16,6 +16,7 @@
 ## API 명세 문서
 ***
 * [Swagger](http://localhost:8080/swagger-ui/index.html)
+* [Rest Docs](http://localhost:8080/docs/index.html)
 
 
 
