@@ -27,7 +27,7 @@ import kotlin.random.Random
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 80)
+@AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 8081)
 @Transactional
 @Rollback
 class BlogKeywordControllerTest {

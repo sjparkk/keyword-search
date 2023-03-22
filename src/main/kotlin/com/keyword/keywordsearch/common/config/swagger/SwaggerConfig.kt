@@ -25,7 +25,7 @@ class SwaggerConfig {
     @Bean
     fun customOpenAPI(): OpenAPI {
         val contact = Contact()
-        contact.url = "http://localhost:8080/swagger-ui/index.html"
+        contact.url = "http://localhost:8081/swagger-ui/index.html"
         return OpenAPI()
             .components(Components())
             .info(
