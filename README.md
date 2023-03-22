@@ -24,6 +24,9 @@
 * [Jar 경로](https://github.com/sjparkk/keyword-search/tree/main/output)
 * java -jar keyword-search.jar
 
+### 주의 사항
+* h2 디비 실행 중 content.mv.db가 이미 존재한다는 오류가 나면 app이 여러개 떠있을 수 있으니 확인 부탁드립니다.
+
 ### 패키지 구성
 1. com.keyword.keywordsearch
     1. controller : 컨트롤러 클래스가 있습니다. 
