@@ -17,8 +17,6 @@
 ## API 명세 문서
 ***
 * [Swagger](http://localhost:8081/swagger-ui/index.html)
-* [Rest Docs](http://localhost:8081/docs/index.html)
-
 
 ## 설계 내용
 
