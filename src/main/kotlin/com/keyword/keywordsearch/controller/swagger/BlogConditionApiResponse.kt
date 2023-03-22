@@ -43,4 +43,4 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
             """
     ),
 )
-annotation class BlogConditionDescription()
+annotation class BlogConditionApiResponse()

@@ -4,7 +4,7 @@ import com.keyword.keywordsearch.common.dto.CommonResponse
 import com.keyword.keywordsearch.common.dto.page.PageInfoDTO
 import com.keyword.keywordsearch.common.dto.page.ReqPageDTO
 import com.keyword.keywordsearch.common.dto.page.ResPageDTO
-import com.keyword.keywordsearch.controller.swagger.BlogConditionDescription
+import com.keyword.keywordsearch.controller.swagger.BlogConditionApiResponse
 import com.keyword.keywordsearch.controller.swagger.PopularKeywordApiResponse
 import com.keyword.keywordsearch.service.BlogKeywordService
 import com.keyword.keywordsearch.service.dto.ResBlogKeywordsDTO
@@ -25,8 +25,13 @@ class BlogKeywordController(
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    // TODO : 어노테이션 변경
-    @BlogConditionDescription
+    @Operation(summary = "블로그 검색 조회", description =
+    """
+        - 검색 결과는 정확도순 또는 최신순으로 제공합니다.
+        - 카카오 or 네이버 API의 키워드로 블로그 검색 결과를 제공합니다.
+        - 인기 검색어 목록 제공을 위해 검색어 내역 저장 이벤트가 발생합니다.
+    """)
+    @BlogConditionApiResponse
     @GetMapping("/search/{keyword}")
     fun getBlogConditionList(
         @NotBlank @PathVariable("keyword") keyword: String,
