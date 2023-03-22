@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class BlogKeywordService(
@@ -74,9 +75,9 @@ class BlogKeywordService(
     fun getPopularSearchKeywordList(): ResPopularKeywordsDTO {
         val popularKeywordResult = blogKeywordRepository.findTop10PopularKeywordsOrderByDesc()
 
-        if(popularKeywordResult.isEmpty()) throw CustomNotFoundPopularKeyword()
+        if(!Objects.isNull(popularKeywordResult)) return ResPopularKeywordsDTO(popularKeywordResult)
 
-        return ResPopularKeywordsDTO(popularKeywordResult)
+        return ResPopularKeywordsDTO(Collections.emptyList())
     }
 
     /**
