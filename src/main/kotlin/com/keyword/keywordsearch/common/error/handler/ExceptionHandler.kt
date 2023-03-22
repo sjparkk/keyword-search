@@ -1,10 +1,7 @@
 package com.keyword.keywordsearch.common.error.handler
 
 import com.keyword.keywordsearch.common.dto.CommonResponse
-import com.keyword.keywordsearch.common.error.CustomBadRequestException
-import com.keyword.keywordsearch.common.error.CustomBlogSearchApisServerException
-import com.keyword.keywordsearch.common.error.CustomInternalServerException
-import com.keyword.keywordsearch.common.error.CustomUnauthorizedException
+import com.keyword.keywordsearch.common.error.*
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.http.HttpStatus
@@ -49,7 +46,16 @@ class ExceptionHandler(
 
     @ExceptionHandler(CustomBlogSearchApisServerException::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    fun badRequestException(e: CustomBlogSearchApisServerException): CommonResponse<Any> {
+    fun customBlogSearchApisServerException(e: CustomBlogSearchApisServerException): CommonResponse<Any> {
+        return CommonResponse(
+            errorCode = Integer.valueOf(getMessage(e.messageKey + ".code")),
+            message = getMessage(e.messageKey + ".message")
+        )
+    }
+
+    @ExceptionHandler(CustomNotFoundPopularKeyword::class)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun customNotFoundPopularKeyword(e: CustomNotFoundPopularKeyword): CommonResponse<Any> {
         return CommonResponse(
             errorCode = Integer.valueOf(getMessage(e.messageKey + ".code")),
             message = getMessage(e.messageKey + ".message")
