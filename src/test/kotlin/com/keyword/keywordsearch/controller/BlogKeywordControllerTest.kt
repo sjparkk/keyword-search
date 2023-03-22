@@ -118,6 +118,53 @@ class BlogKeywordControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").exists())
         }
+    }
+
+
+    @Nested
+    inner class ApiGetPopularSearchKeywordList {
+
+        @BeforeEach
+        fun setup() {
+            blogKeywordSetup.save()
+            log.debug(":: StatisticsBlogKeywordHistory Data Setup Complete")
+        }
+
+        @Test
+        @DisplayName("인기 검색어 조회 테스트")
+        fun getPopularSearchKeywordList() {
+
+            // when
+            val resultActions = mockMvc.perform(
+                RestDocumentationRequestBuilders.get("/api/blog/popular/keyword")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+            )
+                .andDo(MockMvcResultHandlers.print())
+                .andDo(
+                    MockMvcRestDocumentation.document(
+                        "popular-keyword-list-get", Preprocessors.preprocessRequest(Preprocessors.prettyPrint()),
+                        Preprocessors.preprocessResponse(Preprocessors.prettyPrint()),
+                        PayloadDocumentation.responseFields(
+                            PayloadDocumentation.fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("success"),
+                            PayloadDocumentation.fieldWithPath("code").type(JsonFieldType.NUMBER).description("0"),
+                            PayloadDocumentation.fieldWithPath("message").type(JsonFieldType.STRING).description("SUCCESS"),
+
+                            PayloadDocumentation.fieldWithPath("content").type(JsonFieldType.OBJECT).description("응답 데이터"),
+                            PayloadDocumentation.fieldWithPath("content.data").type(JsonFieldType.ARRAY).description("인기 검색어 목록 결과").optional(),
+                            PayloadDocumentation.fieldWithPath("content.data[].keyword").type(JsonFieldType.STRING).description("블로그 검색 키워드").optional(),
+                            PayloadDocumentation.fieldWithPath("content.data[].total").type(JsonFieldType.NUMBER).description("검색 횟수").optional(),
+                        )
+                    )
+                )
+
+            // then
+            resultActions
+                .andExpect(MockMvcResultMatchers.status().isOk)
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").exists())
+        }
 
     }
 }
