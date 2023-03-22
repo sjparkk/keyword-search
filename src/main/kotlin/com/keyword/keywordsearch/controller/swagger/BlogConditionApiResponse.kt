@@ -7,10 +7,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 
 @Operation(summary = "블로그 검색 조회", description =
     """
-        - 키워드를 통해 블로그를 검색할 수 있습니다.
-        - 검색 결과는 정확도순 또는 최신순으로 제공합니다. (기본값 정확도순)
-        - 카카오 API의 키워드로 블로그 검색 결과를 제공합니다.
-        - 카카오 API 장애 시 네이버 블로그 검색 API를 통해 결과를 제공합니다.
+        - 검색 결과는 정확도순 또는 최신순으로 제공합니다.
+        - 카카오 or 네이버 API의 키워드로 블로그 검색 결과를 제공합니다.
         - 인기 검색어 목록 제공을 위해 검색어 내역 저장 이벤트가 발생합니다.
     """)
 @ApiResponses(
