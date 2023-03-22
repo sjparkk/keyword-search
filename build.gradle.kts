@@ -60,6 +60,9 @@ dependencies {
         }
     }
 
+    //Mockito
+    testImplementation("org.mockito:mockito-core:3.12.4")
+
 }
 
 tasks.withType<KotlinCompile> {
